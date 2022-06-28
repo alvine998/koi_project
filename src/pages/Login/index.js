@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
             password: password
         }
 
-        axios.post(`http://192.168.43.100:3000/user/auth`, payload).then(
+        axios.post(`https://koibackend.herokuapp.com/user/auth`, payload).then(
             res => {
                 console.log(res.data);
                 setSession(emailOrUsername);
