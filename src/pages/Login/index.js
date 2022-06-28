@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
             password: password
         }
 
-        axios.post(`https://koibackend.herokuapp.com/user/auth`, payload).then(
+        axios.post(`https://koibackend.herokuapp.com/users/login`, payload).then(
             res => {
                 console.log(res.data);
                 setSession(emailOrUsername);

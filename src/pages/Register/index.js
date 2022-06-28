@@ -40,7 +40,7 @@ const Register = ({ navigation }) => {
             name: name
         }
 
-        axios.post('https://koibackend.herokuapp.com/user/create', bodyPayload).then(
+        axios.post('https://koibackend.herokuapp.com/users', bodyPayload).then(
             res => {
                 console.log(res.data);
                 setName("") 
