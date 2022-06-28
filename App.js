@@ -11,14 +11,30 @@ import Splash from './src/pages/splash';
 const App = () => {
 
   const Stack = createStackNavigator()
-  return(
+  const horizontalAnimation = {
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateX: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.width, 0],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
+  return (
     <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Splash' screenOptions={{headerShown:false}}>
-          <Stack.Screen name='Home' component={MyTabs} />
-          <Stack.Screen name='Login' component={Login}/>
-          <Stack.Screen name='Register' component={Register}/>
-          <Stack.Screen name='Splash' component={Splash}/>
+        <Stack.Navigator initialRouteName='Splash' screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='Home' component={MyTabs} options={horizontalAnimation} />
+          <Stack.Screen name='Login' component={Login} options={horizontalAnimation}/>
+          <Stack.Screen name='Register' component={Register} options={horizontalAnimation}/>
+          <Stack.Screen name='Splash' component={Splash} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
