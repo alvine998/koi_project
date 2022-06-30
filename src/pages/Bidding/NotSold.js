@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import normalize from 'react-native-normalize'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
 
-const Bidding = ({ navigation }) => {
+const NotSold = ({ navigation }) => {
     const [session, setSession] = useState(false)
     const [data, setData] = useState()
     const getUser = () => {
@@ -14,6 +13,7 @@ const Bidding = ({ navigation }) => {
             res => {
                 if (res == null) {
                     setSession(false)
+                    navigation.push("Login")
                 } else {
                     setSession(true)
                 }
@@ -35,20 +35,16 @@ const Bidding = ({ navigation }) => {
                             ) : (
                                 <View style={{justifyContent:"center", alignItems:"center", marginTop:normalize(100)}}>
                                     <Text>Data tidak tersedia</Text>
-                                    <TouchableOpacity style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
-                                        <View style={{width:normalize(50), height:normalize(50), backgroundColor:"red", borderRadius:50, alignItems:"center", justifyContent:"center"}}>
-                                            <Icon name='plus' color={"white"} size={normalize(20)} />
-                                        </View>
-                                    </TouchableOpacity>
+                                   
                                 </View>
                             )
                         }
                     </View>
                 ) : (
                     <View style={styles.container}>
-                        <IconFA5 name='store' color={"#dfdfdf"} size={100} />
+                        <Icon name='user-circle' color={"#dfdfdf"} size={100} />
                         <View style={{ marginTop: normalize(20) }}>
-                            <Text>Daftar lelangan anda, status, tracking</Text>
+                            <Text>Pengaturan akun, deposit, dan lainnya</Text>
                         </View>
                         <View style={styles.btnLogin}>
                             <TouchableOpacity onPress={() => navigation.push('Login')}>
@@ -102,4 +98,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Bidding
+export default NotSold

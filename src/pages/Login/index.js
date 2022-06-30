@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { logo_koi } from '../../assets'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Url } from '../../config/url'
 
 const Login = ({ navigation }) => {
     const [emailOrUsername, setEmailOrUsername] = useState()
@@ -22,7 +23,7 @@ const Login = ({ navigation }) => {
             password: password
         }
 
-        axios.post(`https://koibackend.herokuapp.com/users/login`, payload).then(
+        axios.post(`${Url?.publish}/users/login`, payload).then(
             res => {
                 console.log(res.data);
                 setSession(emailOrUsername);

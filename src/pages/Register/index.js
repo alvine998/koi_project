@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Alert, ScrollView, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import normalize from 'react-native-normalize'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Url } from '../../config/url'
 
 
 const Register = ({ navigation }) => {
@@ -40,7 +41,7 @@ const Register = ({ navigation }) => {
             name: name
         }
 
-        axios.post('https://koibackend.herokuapp.com/users', bodyPayload).then(
+        axios.post(`${Url.publish}/users`, bodyPayload).then(
             res => {
                 console.log(res.data);
                 setName("") 

@@ -1,21 +1,20 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import normalize from 'react-native-normalize'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import IconFA5 from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import IconFA from 'react-native-vector-icons/FontAwesome'
 
-
-const Bidding = ({ navigation }) => {
-    const [session, setSession] = useState(false)
-    const [data, setData] = useState()
+const Bidder = ({navigation}) => {
+    const [bidder, setBidder] = useState(false)
+    const [login, setLogin] = useState(false)
     const getUser = () => {
         AsyncStorage.getItem("loginSession").then(
             res => {
                 if (res == null) {
-                    setSession(false)
+                    setLogin(false)
                 } else {
-                    setSession(true)
+                    setLogin(true)
                 }
             }
         )
@@ -27,28 +26,31 @@ const Bidding = ({ navigation }) => {
     return (
         <>
             {
-                session ? (
-                    <View>
+                login ? (
+                    <>
                         {
-                            data ? (
-                                <View></View>
+                            bidder ? (
+                                <View>
+
+                                </View>
                             ) : (
-                                <View style={{justifyContent:"center", alignItems:"center", marginTop:normalize(100)}}>
-                                    <Text>Data tidak tersedia</Text>
-                                    <TouchableOpacity style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
-                                        <View style={{width:normalize(50), height:normalize(50), backgroundColor:"red", borderRadius:50, alignItems:"center", justifyContent:"center"}}>
-                                            <Icon name='plus' color={"white"} size={normalize(20)} />
+                                <View style={{ alignItems: "center", flex: 1, justifyContent: "center" }}>
+                                    <Icon name='gavel' color={"#dfdfdf"} size={normalize(100)} />
+                                    <Text style={{ marginTop: normalize(20) }}>Anda masih belum menjadi bidder</Text>
+                                    <TouchableOpacity style={{ marginTop: normalize(50) }}>
+                                        <View style={{ width: normalize(200), height: normalize(40), backgroundColor: "red", alignItems: "center", justifyContent: "center", borderRadius: 10 }}>
+                                            <Text style={{ color: "white" }}>Daftar Menjadi Bidder</Text>
                                         </View>
                                     </TouchableOpacity>
                                 </View>
                             )
                         }
-                    </View>
+                    </>
                 ) : (
                     <View style={styles.container}>
-                        <IconFA5 name='store' color={"#dfdfdf"} size={100} />
+                        <Icon name='gavel' color={"#dfdfdf"} size={100} />
                         <View style={{ marginTop: normalize(20) }}>
-                            <Text>Daftar lelangan anda, status, tracking</Text>
+                            <Text>Bid anda, status bid, tracking</Text>
                         </View>
                         <View style={styles.btnLogin}>
                             <TouchableOpacity onPress={() => navigation.push('Login')}>
@@ -64,6 +66,7 @@ const Bidding = ({ navigation }) => {
                     </View>
                 )
             }
+
         </>
     )
 }
@@ -102,4 +105,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Bidding
+export default Bidder
