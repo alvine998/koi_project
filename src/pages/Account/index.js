@@ -4,10 +4,13 @@ import normalize from 'react-native-normalize'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Icon5 from 'react-native-vector-icons/FontAwesome5'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
+import { Url } from '../../config/url'
 
 
 const Account = ({ navigation }) => {
     const [user, setUser] = useState(false)
+    const [data, setData] = useState()
 
     const getSession = () => {
         AsyncStorage.getItem("loginSession").then(
@@ -16,6 +19,12 @@ const Account = ({ navigation }) => {
                     setUser(false)
                 } else {
                     setUser(true)
+                    axios.get(`${Url.publish}/users/mail/${result}`).then(
+                        res => {
+                            console.log(res.data);
+                            setData(res.data)
+                        }
+                    )
                 }
             }
         )
@@ -44,7 +53,7 @@ const Account = ({ navigation }) => {
 
                                 </View>
                                 <View style={{ marginLeft: normalize(10) }}>
-                                    <Text style={{ color: "white" }}>Jaya</Text>
+                                    <Text style={{ color: "white" }}>{data?.name.toUpperCase()}</Text>
                                     <Text style={{ color: "white" }}>n/a</Text>
                                 </View>
                             </View>

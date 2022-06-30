@@ -35,7 +35,7 @@ const Bidding = ({ navigation }) => {
                             ) : (
                                 <View style={{justifyContent:"center", alignItems:"center", marginTop:normalize(100)}}>
                                     <Text>Data tidak tersedia</Text>
-                                    <TouchableOpacity style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
+                                    <TouchableOpacity onPress={()=>navigation.push('Create')} style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
                                         <View style={{width:normalize(50), height:normalize(50), backgroundColor:"red", borderRadius:50, alignItems:"center", justifyContent:"center"}}>
                                             <Icon name='plus' color={"white"} size={normalize(20)} />
                                         </View>
