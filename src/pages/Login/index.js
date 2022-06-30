@@ -48,7 +48,7 @@ const Login = ({ navigation }) => {
     return (
         <>
             <View style={{ padding: normalize(30) }}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity onPress={() => navigation.push("Home")}>
                     <Icon name='chevron-left' color={"black"} size={20} />
                 </TouchableOpacity>
                 <View style={{ alignItems: "center", justifyContent: "center", marginTop: normalize(50) }}>
