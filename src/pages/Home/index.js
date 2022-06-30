@@ -7,7 +7,7 @@ import IconFA from "react-native-vector-icons/FontAwesome";
 import { event1, event2, koi1, koi2, koi5 } from "../../assets";
 // import Carousel from "react-native-snap-carousel";
 
-const Home = () => {
+const Home = ({navigation}) => {
     const [search, setSearch] = useState('')
     const onChange = (e) => {
         setSearch(e)
@@ -73,7 +73,7 @@ const Home = () => {
                     <View style={styles.pagination}>
                         {
                             koiProducts.map((data, i) => (
-                                <TouchableOpacity style={data[0] ? {} : { marginLeft: normalize(10) }} key={i}>
+                                <TouchableOpacity onPress={()=>navigation.push('Products')} style={data[0] ? {} : { marginLeft: normalize(10) }} key={i}>
                                     {
                                         data?.video == true ? (
                                             <ImageBackground source={data.image} style={{ width: normalize(110), height: normalize(110) }}>
@@ -93,12 +93,11 @@ const Home = () => {
                                 </TouchableOpacity>
                             ))
                         }
-
                     </View>
                     <View style={styles.pagination}>
                         {
                             koiProducts.map((data, i) => (
-                                <TouchableOpacity style={data[0] ? {} : { marginLeft: normalize(10) }} key={i}>
+                                <TouchableOpacity onPress={()=>navigation.push('Products')} style={data[0] ? {} : { marginLeft: normalize(10) }} key={i}>
                                     {
                                         data?.video == true ? (
                                             <ImageBackground source={data.image} style={{ width: normalize(110), height: normalize(110) }}>
