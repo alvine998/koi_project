@@ -50,7 +50,7 @@ const Create = ({ navigation }) => {
         formData.append("files", photoss)
 
         let result = { info: "" }
-        result = await fetch(`https://koibackend.herokuapp.com/upload/products`, {
+        result = await fetch(`${Url.publish}/upload/products`, {
             method: "POST",
             body: formData
         }).then(
