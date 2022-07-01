@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import normalize from 'react-native-normalize'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import IconFA5 from 'react-native-vector-icons/FontAwesome5'
@@ -12,10 +12,10 @@ const Bidding = ({ navigation }) => {
     const [session, setSession] = useState(false)
     const [data, setData] = useState()
     const [userid, setUserid] = useState()
-    const [products, setProducts] = useState([])
-    const getUser = async() => {
+    const [products, setProducts] = useState()
+    const getUser = async () => {
         const email = await AsyncStorage.getItem("loginSession")
-        if(email == null){
+        if (email == null) {
             setSession(false)
         } else {
             setSession(true)
@@ -34,8 +34,9 @@ const Bidding = ({ navigation }) => {
 
     useEffect(() => {
         getUser()
+        console.log(userid);
         getProducts()
-    }, [])
+    }, [userid])
     return (
         <>
             {
@@ -44,25 +45,38 @@ const Bidding = ({ navigation }) => {
                         {
                             products !== [] ? (
                                 <View>
-                                    {
-                                        products.map((value,i)=>(
-                                            <View key={i}>
-                                                <Text>{value.image}</Text>
-                                                <Image source={`${Url.publish}/resources/uploads/${value.image}`} style={{width:normalize(30), height:normalize(50)}} />
-                                            </View>
-                                        ))
-                                    }
-                                    <TouchableOpacity onPress={()=>navigation.push('Create')} style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
-                                        <View style={{width:normalize(50), height:normalize(50), backgroundColor:"red", borderRadius:50, alignItems:"center", justifyContent:"center"}}>
-                                            <Icon name='plus' color={"white"} size={normalize(20)} />
+                                    <TouchableOpacity onPress={() => navigation.push('Create')} style={{marginTop: normalize(20), paddingRight: normalize(20), alignItems:"center", justifyContent:"center" }}>
+                                        <View style={{ width: normalize(150), height: normalize(40), backgroundColor: "red",alignItems: "center", justifyContent: "center", borderRadius:20, flexDirection:"row" }}>
+                                            <Icon name='plus' color={"white"} size={normalize(15)} />
+                                            <Text style={{color:"white", marginLeft:normalize(20)}}>Tambah Lelang</Text>
                                         </View>
                                     </TouchableOpacity>
+                                    <ScrollView style={{ padding: normalize(20) }}>
+                                        {
+                                            products.map((value, i) => (
+                                                <View key={i} style={value == value[0] ? {} : { marginTop: normalize(10) }}>
+                                                    <TouchableOpacity>
+                                                        <View style={{ backgroundColor: "white", width: normalize(330), flexDirection: "row", borderRadius:20 }}>
+                                                            <Image source={{ uri: `${Url.publish}/resources/uploads/${value.image}` }} style={{ width: normalize(150), height: normalize(150) }} />
+                                                            <View style={{ padding: normalize(10) }}>
+                                                                <Text>{value.title}</Text>
+                                                                <Text>{value.category}</Text>
+                                                                <Text>{value.province}, {value.city}</Text>
+                                                                <Text>Harga : {value.price}</Text>
+                                                                <Text>Bid : ++{value.increase}</Text>
+                                                            </View>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            ))
+                                        }
+                                    </ScrollView>
                                 </View>
                             ) : (
-                                <View style={{justifyContent:"center", alignItems:"center", marginTop:normalize(100)}}>
+                                <View style={{ justifyContent: "center", alignItems: "center", marginTop: normalize(100) }}>
                                     <Text>Data tidak tersedia</Text>
-                                    <TouchableOpacity onPress={()=>navigation.push('Create')} style={{marginLeft:"auto", marginTop:normalize(400), paddingRight:normalize(20)}}>
-                                        <View style={{width:normalize(50), height:normalize(50), backgroundColor:"red", borderRadius:50, alignItems:"center", justifyContent:"center"}}>
+                                    <TouchableOpacity onPress={() => navigation.push('Create')} style={{ marginLeft: "auto", marginTop: normalize(400), paddingRight: normalize(20) }}>
+                                        <View style={{ width: normalize(50), height: normalize(50), backgroundColor: "red", borderRadius: 50, alignItems: "center", justifyContent: "center" }}>
                                             <Icon name='plus' color={"white"} size={normalize(20)} />
                                         </View>
                                     </TouchableOpacity>
