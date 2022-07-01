@@ -16,7 +16,7 @@ const Splash = (props) => {
                 <View style={styles.objCenter}>
                     <Image source={logo_koi} style={styles.imgSize} />
                     <View style={{marginTop:normalize(20)}}>
-                        <Text style={{color:"white", fontSize:normalize(18)}}>Powered by ErrysJaya</Text>
+                        <Text style={{color:"white", fontSize:normalize(18)}}>Powered by Koisenta</Text>
                     </View>
                 </View>
             </View>
