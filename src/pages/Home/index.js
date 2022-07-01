@@ -57,7 +57,7 @@ const Home = ({navigation}) => {
                 <View style={{ padding: normalize(15) }}>
                     <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }}>
                         <Icon name="shield-alt" size={normalize(25)} color="blue" />
-                        <Text style={styles.text1}>Rekening Penjamin Errys Jaya Koi</Text>
+                        <Text style={styles.text1}>Rekening Penjamin Koisenta</Text>
                         <Icon name="chevron-right" style={{ marginLeft: "auto" }} size={normalize(15)} color="grey" />
                     </TouchableOpacity>
                 </View>

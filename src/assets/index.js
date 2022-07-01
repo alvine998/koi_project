@@ -1,4 +1,4 @@
-import logo_koi from './images/logo_koi.png'
+import logo_koi from './images/logo_koi.jpeg'
 import event1 from './images/event1.jpg'
 import event2 from './images/event2.jpeg'
 import koi1 from './images/koi1.jpg'
