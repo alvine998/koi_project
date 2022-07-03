@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Linking, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import normalize from "react-native-normalize";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconFA from "react-native-vector-icons/FontAwesome";
@@ -91,7 +91,7 @@ const Products = ({ navigation }) => {
                 </View>
 
                 <View style={styles.boxYellow}>
-                    <TouchableOpacity style={styles.boxWA}>
+                    <TouchableOpacity onPress={()=>Linking.openURL(`whatsapp://send?text=Bid Koisenta Ref #0001&phone=6287855797268`)} style={styles.boxWA}>
                         <Icon name='whatsapp' color={"green"} solid size={normalize(30)} />
                     </TouchableOpacity>
 
