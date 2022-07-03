@@ -12,7 +12,7 @@ const Bidding = ({ navigation }) => {
     const [session, setSession] = useState(false)
     const [data, setData] = useState()
     const [userid, setUserid] = useState()
-    const [products, setProducts] = useState()
+    const [products, setProducts] = useState([])
     const getUser = async () => {
         const email = await AsyncStorage.getItem("loginSession")
         if (email == null) {
@@ -41,7 +41,7 @@ const Bidding = ({ navigation }) => {
         <>
             {
                 session ? (
-                    <View>
+                    <ScrollView>
                         {
                             products !== [] ? (
                                 <View>
@@ -83,7 +83,7 @@ const Bidding = ({ navigation }) => {
                                 </View>
                             )
                         }
-                    </View>
+                    </ScrollView>
                 ) : (
                     <View style={styles.container}>
                         <IconFA5 name='store' color={"#dfdfdf"} size={100} />
