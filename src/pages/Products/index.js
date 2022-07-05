@@ -49,10 +49,27 @@ const Products = ({ navigation }) => {
             setBid(a)
         }
     }
+    const [time, setTime] = useState({ hours: 48, mins: 0, secs: 0 })
 
     useEffect(() => {
-
-    }, [])
+        if (time.mins < 0) { if (timerId) { clearInterval(timerId) } return }
+        const timerId = setInterval(() => {
+            if (time.secs <= 0) {
+                if (time.mins <= 0) {
+                    if (time.hours <= 0) {
+                        setTime({ ...time, hours: time.hours - 1, mins: 59 })
+                    } else {
+                        setTime({ ...time, hours: time.hours - 1, mins: 59, secs:59 })
+                    }
+                }
+                else {
+                    setTime({ ...time, mins: time.mins - 1, secs: 59 })
+                }
+            }
+            else setTime({ ...time, mins: time.mins, secs: time.secs - 1 }) 
+        }, 1000)
+        return () => clearInterval(timerId);
+    }, [time])
     return (
         <>
             <View style={styles.header}>
@@ -77,7 +94,7 @@ const Products = ({ navigation }) => {
                             </View>
                             <View style={{ flexDirection: "row", marginTop: normalize(10) }}>
                                 <Icon name='stopwatch' size={normalize(20)} />
-                                <Text style={{ marginLeft: normalize(14) }}>02:08:05</Text>
+                                <Text style={{ marginLeft: normalize(14) }}>{time.hours < 10 && 0}{time.hours >= 0 ? time.hours : 0}:{time.mins < 10 && 0}{time.mins >= 0 ? time.mins : 0}:{time.secs < 10 && 0}{time.secs}</Text>
                             </View>
                         </View>
                         <View style={{ marginLeft: 'auto' }}>
@@ -91,11 +108,11 @@ const Products = ({ navigation }) => {
                 </View>
 
                 <View style={styles.boxYellow}>
-                    <TouchableOpacity onPress={()=>Linking.openURL(`whatsapp://send?text=Bid Koisenta Ref #0001&phone=6287855797268`)} style={styles.boxWA}>
+                    <TouchableOpacity onPress={() => Linking.openURL(`https://wa.me/6287855797268?text=Halo+Saya+Dari+Koisenta+telah+melihat+iklan+anda`)} style={styles.boxWA}>
                         <Icon name='whatsapp' color={"green"} solid size={normalize(30)} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>onMinus(bid, increase, price)} style={styles.boxMin}>
+                    <TouchableOpacity onPress={() => onMinus(bid, increase, price)} style={styles.boxMin}>
                         <Icon name='minus' color={"grey"} solid size={normalize(30)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.boxPrice}>

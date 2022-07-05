@@ -1,5 +1,5 @@
 import { Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import normalize from "react-native-normalize";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconFA from "react-native-vector-icons/FontAwesome";
@@ -12,6 +12,27 @@ const Home = ({navigation}) => {
     const onChange = (e) => {
         setSearch(e)
     }
+
+    const [time, setTime] = useState({ hours: 48, mins: 0, secs: 0 })
+    useEffect(() => {
+        if (time.mins < 0) { if (timerId) { clearInterval(timerId) } return }
+        const timerId = setInterval(() => {
+            if (time.secs <= 0) {
+                if (time.mins <= 0) {
+                    if (time.hours <= 0) {
+                        setTime({ ...time, hours: time.hours - 1, mins: 59 })
+                    } else {
+                        setTime({ ...time, hours: time.hours - 1, mins: 59, secs:59 })
+                    }
+                }
+                else {
+                    setTime({ ...time, mins: time.mins - 1, secs: 59 })
+                }
+            }
+            else setTime({ ...time, mins: time.mins, secs: time.secs - 1 }) 
+        }, 1000)
+        return () => clearInterval(timerId);
+    }, [time])
 
     const koiProducts = [
         {
@@ -87,7 +108,7 @@ const Home = ({navigation}) => {
                                     <Text>{data.owner}</Text>
                                     <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 'auto' }}>
                                         <Icon name="stopwatch" size={normalize(10)} color="grey" />
-                                        <Text style={{ fontSize: normalize(12) }}>{data.time}</Text>
+                                        <Text style={{ fontSize: normalize(12) }}>{time.hours < 10 && 0}:{time.hours >= 0 ? time.hours : 0}:{time.mins < 10 && 0}{time.mins >= 0 ? time.mins : 0}:{time.secs < 10 && 0}{time.secs}</Text>
                                     </View>
                                     <Text style={{ color: "black", marginLeft: 'auto' }}>{data.price}</Text>
                                 </TouchableOpacity>
